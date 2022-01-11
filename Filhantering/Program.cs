@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Filhantering
 {
@@ -6,9 +7,23 @@ namespace Filhantering
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Vad heter du?");
-            string Name = Console.ReadLine();
-            Console.WriteLine(Name);
+            string path = @"C:\TE42122\c#\D220111 Filhantering\Filhantering\Filhantering\hello.txt";
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                Console.WriteLine("Vad heter du?");
+                sw.WriteLine(Console.ReadLine());
+            }
+            Console.WriteLine("Tryck ENTER för att läsa upp filen");
+            Console.ReadLine();
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+
         }
     }
 }
